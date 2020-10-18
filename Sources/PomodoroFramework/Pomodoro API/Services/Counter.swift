@@ -31,13 +31,13 @@ public class Counter: InternalCounter {
         
         return dispatchtTimer
     }()
-    var dispatchEventHandler: (() -> Void)?
+    public var dispatchEventHandler: (() -> Void)?
     
     public init(interval: TimeInterval) {
         self.interval = interval
     }
     
-    public deinit {
+    deinit {
         timer.setEventHandler {}
         timer.cancel()
         resume()

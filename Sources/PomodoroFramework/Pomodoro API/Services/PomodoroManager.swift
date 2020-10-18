@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Manager {
+public protocol Manager {
     typealias CompletionHandler = (PomodoroType) -> Void
     typealias ReceivingValueHandler = (TimeInterval) -> Void
 
