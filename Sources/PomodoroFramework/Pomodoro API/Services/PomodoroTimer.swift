@@ -7,34 +7,34 @@
 
 import Foundation
 
-protocol CountdownTimer {
+public protocol CountdownTimer {
     func countdown(completion: @escaping (TimeInterval) -> Void)
     func stop()
     func reset()
 }
 
-class PomodoroTimer: CountdownTimer  {
+public class PomodoroTimer: CountdownTimer  {
     var timeInSeconds: TimeInterval
     var counter: InternalCounter
     
     private var backupTimeInSeconds: TimeInterval
 
-    init(timeInSeconds: TimeInterval, counter: InternalCounter) {
+    public init(timeInSeconds: TimeInterval, counter: InternalCounter) {
         self.timeInSeconds = timeInSeconds
         self.backupTimeInSeconds = timeInSeconds
         self.counter  = counter
     }
     
-    func stop() {
+    public func stop() {
         self.counter.suspend()
     }
     
-    func reset() {
+    public func reset() {
         self.stop()
         self.timeInSeconds = self.backupTimeInSeconds
     }
         
-    func countdown(completion: @escaping (TimeInterval) -> Void) {
+    public func countdown(completion: @escaping (TimeInterval) -> Void) {
         self.counter.dispatchEventHandler = { [weak self] in
             completion(self?.subtract(seconds: 1) ?? 0)
             self?.stopWhenReachesZeroSeconds()

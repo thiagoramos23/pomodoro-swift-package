@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol InternalCounter {
+public protocol InternalCounter {
     var dispatchEventHandler: (() -> Void)? { get set }
     func resume()
     func suspend()
 }
 
-class Counter: InternalCounter {
+public class Counter: InternalCounter {
     private enum State {
         case suspended
         case resumed
@@ -33,17 +33,17 @@ class Counter: InternalCounter {
     }()
     var dispatchEventHandler: (() -> Void)?
     
-    init(interval: TimeInterval) {
+    public init(interval: TimeInterval) {
         self.interval = interval
     }
     
-    deinit {
+    public deinit {
         timer.setEventHandler {}
         timer.cancel()
         resume()
     }
         
-    func resume() {
+    public func resume() {
         if state == .resumed {
             return
         }
@@ -52,7 +52,7 @@ class Counter: InternalCounter {
         timer.resume()
     }
     
-    func suspend() {
+    public func suspend() {
         if state == .suspended {
             return
         }

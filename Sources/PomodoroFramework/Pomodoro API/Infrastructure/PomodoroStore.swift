@@ -7,17 +7,17 @@
 
 import Foundation
 
-enum PomodoroModelType {
+public enum PomodoroModelType {
     case workInterval
     case breakInterval
 }
 
-protocol PomodoroModel {
+public protocol PomodoroModel {
     var id: UUID { get set }
     var type: PomodoroModelType { get set }
 }
 
-protocol PomodoroStore {
+public protocol PomodoroStore {
     
     func save(pomodoro: PomodoroModel)
     func getTotalCompleted() -> Int

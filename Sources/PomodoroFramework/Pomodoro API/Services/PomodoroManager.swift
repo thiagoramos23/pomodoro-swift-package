@@ -21,24 +21,24 @@ public final class PomodoroManager: Manager {
     private var pomodoro: Pomodoro = Pomodoro(state: .stopped)
     private var nextPomodoroType: PomodoroType
     
-    init(pomodoroTimer: CountdownTimer, nextPomodoroType: PomodoroType) {
+    public init(pomodoroTimer: CountdownTimer, nextPomodoroType: PomodoroType) {
         self.pomodoroTimer    = pomodoroTimer
         self.nextPomodoroType = nextPomodoroType
     }
     
-    func pause() {
+    public func pause() {
         guard self.pomodoro.isRunning() else { return }
         self.pomodoro = self.pomodoro.stop()
         self.pomodoroTimer.stop()
     }
     
-    func reset() {
+    public func reset() {
         guard self.pomodoro.isRunning() else { return }
         self.pomodoro = self.pomodoro.stop()
         self.pomodoroTimer.reset()
     }
         
-    func start(completion: @escaping CompletionHandler, receivingValue: @escaping ReceivingValueHandler) {
+    public func start(completion: @escaping CompletionHandler, receivingValue: @escaping ReceivingValueHandler) {
         guard self.pomodoro.isNotRuning() else { return }
         
         self.pomodoro = self.pomodoro.start()
